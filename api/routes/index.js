@@ -1,8 +1,7 @@
 var express = require('express');
-var router = express.Router();
 
-
-module.exports = function(passport){
+module.exports = function(db, passport){
+  var router = express.Router();
 
   router.post('/signup', (req, res, next) => {
     passport.authenticate('local-signup', {
