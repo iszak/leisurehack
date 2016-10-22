@@ -9,10 +9,12 @@ module.exports = {
           defaultValue: Sequelize.UUIDV4
         },
         firstName: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         lastName: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         gender: {
           type: Sequelize.STRING
@@ -24,7 +26,8 @@ module.exports = {
           type: Sequelize.FLOAT
         },
         sport: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         position: {
           type: Sequelize.ENUM(
@@ -36,10 +39,12 @@ module.exports = {
             'Right mid',
             'Striker',
             'Goalkeeper'
-          )
+          ),
+          allowNull: false,
         },
         availability: {
-          type: Sequelize.ARRAY(Sequelize.TEXT)
+          type: Sequelize.ARRAY(Sequelize.TEXT),
+          allowNull: false,
         },
         createdAt: {
           type: Sequelize.DATE
