@@ -4,8 +4,11 @@ import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
 
 import Stats from './dashboard-views/stats';
+import Team from './dashboard-views/team';
+import Game from './dashboard-views/game';
 import ScheduleGame from './dashboard-views/schedule-game';
 import LookForPlayer from './dashboard-views/look-for-player';
 
@@ -40,7 +43,13 @@ export default class Dashboard extends Component {
 
         switch(this.state.childView) {
             case 'Stats':
-                view = <Stats />
+                view = <Stats onViewChange={this.handleChildViewChange} />
+                break;
+            case 'Team':
+                view = <Team />
+                break;
+            case 'Game':
+                view = <Game />
                 break;
             case 'ScheduleGame':
                 view = <ScheduleGame />
@@ -71,6 +80,8 @@ export default class Dashboard extends Component {
                         onRequestChange={(open) => this.setState.open = open}
                     >
                         <MenuItem onTouchTap={() => this.handleChildViewChange('Stats')}>Dashboard</MenuItem>
+                        <MenuItem onTouchTap={() => this.handleChildViewChange('Team')}>Team</MenuItem>
+                        <Divider />
                         <MenuItem onTouchTap={() => this.handleChildViewChange('ScheduleGame')}>Schedule game</MenuItem>
                         <MenuItem onTouchTap={() => this.handleChildViewChange('LookForPlayer')}>Look for player</MenuItem>
                     </Drawer>
