@@ -43,8 +43,9 @@ export default class SignUp extends Component {
           password: this.state.password,
           email: this.state.email,
         })
-      }).then(function(response) {
-        console.log('response',response);
+      }).then(response => {
+        console.log(response);
+        this.props.onViewChange('Dashboard');
       }).catch(function(err) {
         console.log('err', err);
       });
