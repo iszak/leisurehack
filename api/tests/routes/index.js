@@ -20,7 +20,7 @@ describe('POST /signup', function() {
         email: 'bish0p@hotmail.com',
         password: 'password',
         firstName: 'Ben',
-        lastName: 'Bishop'
+        lastName: 'Bishop',
 
       })
       .set('Accept', 'application/json')

@@ -37,36 +37,31 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-
-        // asynchronous
-        // User.findOne wont fire unless data is sent back
-        process.nextTick(function() {
-
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ where: {'email': email} }).then(function(user) {
-
+        User.findOne({ where: {'email': email} }).then(user => {
             // check to see if theres already a user with that email
             if (user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                return done(null, false, {'signupMessage': 'That email is already taken.'});
             } else {
                 User.create({
                   email: req.body.email,
                   password: req.body.password,
                   firstName: req.body.firstName,
                   lastName : req.body.lastName
-                }).then(() => {
-                  return done(null, newUser);
+                }).then(user => {
+                  req.login(user, function(err) {
+                    if (err) {
+                      return done(err);
+                    }
+
+                    return done(null, user);
+                  });
                 }, error => {
                   return done(error.errors);
                 });
-
             }
-
         });
-
-        });
-
     }));
 
         // =========================================================================
@@ -82,7 +77,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) { // callback with email and password from our form
-
+console.log('cock and bollocks')
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
