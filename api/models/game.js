@@ -1,23 +1,33 @@
-var Game = sequelize.define('game', {
-  uuid: {
-    type: Sequelize.UUID,
-    primaryKey: true
-  },
-  location: {
-    type: Sequelize.STRING
-  },
-  type: {
-    type: Sequelize.ENUM('5x5','11x11')
-  },
-  date: {
-    type: Sequelize.DATE
-  },
-},
-{
-    classMethods:{
-        associate:function(models){
-            Game.hasMany(User);
+module.exports = function(sequelize, DataTypes) {
+  const Game = sequelize.define(
+    'game',
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+      },
+      location: {
+        type: DataTypes.STRING
+      },
+      type: {
+        type: DataTypes.ENUM(
+          '5 aside',
+          '11 aside'
+        )
+      },
+      date: {
+        type: DataTypes.DATE
+      },
+    },
+    {
+      classMethods: {
+        associate: function(models) {
+          Game.hasMany(models.user);
         }
+      }
     }
+  );
+
+  return Game;
 }
-);

@@ -1,23 +1,33 @@
-var Team = sequelize.define('team', {
-  uuid: {
-    type: Sequelize.UUID,
-    primaryKey: true
-  },
-  name: {
-    type: Sequelize.STRING
-  },
-  sport: {
-    type: Sequelize.STRING
-  },
-  level: {
-    type: Sequelize.ENUM('Casual','Amateur')
-  }
-},
-{
-    classMethods:{
-        associate:function(models){
-            Team.hasMany(User);
+module.exports = function(sequelize, DataTypes) {
+  const Team = sequelize.define(
+    'team',
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+      },
+      name: {
+        type: DataTypes.STRING
+      },
+      sport: {
+        type: DataTypes.STRING
+      },
+      level: {
+        type: DataTypes.ENUM(
+          'Casual',
+          'Amateur'
+        )
+      }
+    },
+    {
+      classMethods:{
+        associate: function(models) {
+          Team.hasMany(models.user);
         }
+      }
     }
+  );
+
+  return Team
 }
-);
