@@ -6,6 +6,9 @@
     cp docker/env/postgres.env.dist docker/env/postgres.env
 
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml run npm install
+
+    docker-compose -f docker-compose.yml -f docker-compose.dev.yml run app ./node_modules/.bin/sequelize db:migrate
+
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
     open http://0.0.0.0:8080/
