@@ -40,6 +40,12 @@ module.exports = {
         },
         availability: {
           type: Sequelize.ARRAY(Sequelize.TEXT)
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
         }
       }
     );

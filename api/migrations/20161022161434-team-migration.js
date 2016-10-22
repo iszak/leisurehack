@@ -19,6 +19,12 @@ module.exports = {
             'Casual',
             'Amateur'
           )
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
         }
       }
     );
