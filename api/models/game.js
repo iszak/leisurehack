@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate: function(models) {
-          Game.hasMany(models.user);
+          // Game.hasMany(models.user);
         }
       }
     }

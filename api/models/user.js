@@ -98,8 +98,8 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          User.hasMany(models.invite);
-          User.belongsTo(models.team);
+          // User.hasMany(models.invite);
+          // User.belongsTo(models.team);
         }
       }
     }
