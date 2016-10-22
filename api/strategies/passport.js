@@ -45,24 +45,20 @@ module.exports = function(passport) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ where: {'email': email} }).then(function(user) {
-            // if there are any errors, return the error
-            if (err)
-                return done(err);
 
             // check to see if theres already a user with that email
             if (user) {
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
-
-                var newUser = User.build({
-                  email: email,
-                  password: User.generateHash(password)
-                });
-
-                newUser.save().then(function(err) {
-                  if (err)
-                      throw err;
+                User.create({
+                  email: req.body.email,
+                  password: req.body.password,
+                  firstName: req.body.firstName,
+                  lastName : req.body.lastName
+                }).then(() => {
                   return done(null, newUser);
+                }, error => {
+                  return done(error.errors);
                 });
 
             }
