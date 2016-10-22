@@ -13,25 +13,25 @@ produces:
   - application/json
 
 paths:
-  /player:
+  /user:
     post:
-      summary: Player
+      summary: User
       description: |
-        Create a player
+        Create a user
       parameters:
-        - name: player
+        - name: user
           in: body
-          description: A player
+          description: A user
           required: true
           schema:
-              $ref: '#/definitions/Player'
+              $ref: '#/definitions/User'
       tags:
-        - Player
+        - User
       responses:
         200:
-          description: New player
+          description: New user
           schema:
-            $ref: '#/definitions/Player'
+            $ref: '#/definitions/User'
 
   /team:
     post:
@@ -57,7 +57,7 @@ paths:
     post:
       summary: Team invite
       description: |
-        Invite a player to join a team
+        Invite a user to join a team
       parameters:
         - name: invite
           in: body
@@ -93,7 +93,7 @@ paths:
           schema:
             $ref: '#/definitions/TeamInvite'
 
-  /team/{team_id}/game/{player_id}:
+  /team/{team_id}/game/{user_id}:
     post:
       summary: Accept a team game invite
       description: |
@@ -104,9 +104,9 @@ paths:
           description: A team id
           required: true
           type: string
-        - name: player_id
+        - name: user_id
           in: path
-          description: A player id
+          description: A user id
           required: true
           type: string
       tags:
@@ -124,9 +124,9 @@ paths:
           description: A team id
           required: true
           type: string
-        - name: player_id
+        - name: user_id
           in: path
-          description: A player id
+          description: A user id
           required: true
           type: string
       tags:
@@ -168,9 +168,25 @@ definitions:
         format: date-time
 
 
-  Player:
+
+  Session:
     type: object
     required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        description: Email
+      password:
+        type: string
+        description: Password
+
+  User:
+    type: object
+    required:
+      - email
+      - password
       - name
       - sport
       - position
@@ -178,6 +194,12 @@ definitions:
     properties:
       id:
         type: string
+      email:
+        type: string
+        description: Email
+      password:
+        type: string
+        description: Password
       name:
         type: string
         description: Full name
@@ -255,6 +277,10 @@ definitions:
     properties:
       teamId:
         type: string
+      userIds:
+        type: array
+        items:
+          type: string
       location:
         type: string
       type:
