@@ -1,25 +1,28 @@
 var express = require('express');
-var router = express.Router();
 
+module.exports = function(db, passport){
+  var router = express.Router();
 
-module.exports = function(passport){
-
-  router.post('/signup', (req, res, next) => {
-    passport.authenticate('local-signup', {
-          successRedirect : '/success', // redirect to the secure profile section
-          failureRedirect : '/fail', // redirect back to the signup page if there is an error
-          failureFlash : true // allow flash messages
-      });
+  router.post('/signup', passport.authenticate('local-signup', {
+    failureFlash : false // allow flash messages
+  }), (req, res) => {
+    console.log(req.user)
+    if (req.user) {
+      res.status(201)
+      res.send(req.user)
+    } else {
+      res.status(404)
+    }
   });
 
 
-  router.post('/success', (req, res, next) => {
+  router.get('/success', (req, res, next) => {
     res.json({message: 'login success'});
   });
 
 
-  router.post('/fail', (req, res, next) => {
-    res.json(res.body);
+  router.get('/fail', (req, res, next) => {
+    res.json({message: res.body});
   });
 
 

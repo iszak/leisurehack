@@ -1,27 +1,30 @@
 const express = require('express');
-const router = express.Router();
 
-const Team = require('../models/index').team
-const Game = require('../models/index').game
+module.exports = (db) => {
+  const router = express.Router();
 
-router.post('/', (req, res, next) => {
-  Team.findById(req.body.teamId).then(team => {
-    if (!team) {
-      res.status(404);
-      res.send({errors: ['Team not found']});
-    } else {
-      const data = req.body
-            data.teamId = team.id
+  const Team = db.team
+  const Game = db.game
 
-      Game.create(data).then(game => {
-        res.status(201);
-        res.send(game);
-      }, error => {
-        res.status(400);
-        res.send(error.errors);
-      })
-    }
-  })
-});
+  router.post('/', (req, res, next) => {
+    Team.findById(req.body.teamId).then(team => {
+      if (!team) {
+        res.status(404);
+        res.send({errors: ['Team not found']});
+      } else {
+        const data = req.body
+              data.teamId = team.id
 
-module.exports = router;
+        Game.create(data).then(game => {
+          res.status(201);
+          res.send(game);
+        }, error => {
+          res.status(400);
+          res.send(error.errors);
+        })
+      }
+    })
+  });
+
+  return router
+}

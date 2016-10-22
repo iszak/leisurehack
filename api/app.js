@@ -6,17 +6,28 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var cors = require('cors');
+
+const db = require('./models/index');
 
 require('./strategies/passport')(passport);
 
-const routes = require('./routes/index')(passport);
-const users = require('./routes/users');
-const teams = require('./routes/teams');
-const games = require('./routes/games');
+const routes = require('./routes/index')(db, passport);
+const users = require('./routes/users')(db);
+const teams = require('./routes/teams')(db);
+const games = require('./routes/games')(db);
 
+require('./hooks/team-invite')(db);
 
 var app = express();
 
+var corsOptions = {
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST'],
+};
+
+app.use(cors(corsOptions));
 
 
 // uncomment after placing your favicon in /public
