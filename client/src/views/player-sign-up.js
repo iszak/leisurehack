@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
@@ -15,6 +14,11 @@ import _ from 'lodash';
 const sports = [
     {value: 'football', label: 'Football'},
     {value: 'hockey', label: 'Hockey'}
+];
+
+const genders = [
+    {value: 'male', label: 'Male'},
+    {value: 'female', label: 'Female'}
 ];
 
 const positions = [
@@ -43,7 +47,15 @@ const paperStyle = {
 };
 
 export default class PlayerSignUp extends Component {
-    state = { sport: '', position: '', availability: [], weight: 0, height: 0 };
+    state = {
+        sport: '',
+        position: '',
+        availability: [],
+        gender: '',
+        age: 0,
+        weight: 0,
+        height: 0
+    };
 
     handleChange = curry((name, event, index, value) => {
         this.setState(previousState => {
@@ -61,13 +73,7 @@ export default class PlayerSignUp extends Component {
 
     checkChange = curry((value, event, bool) => {
         this.setState(previousState => {
-
-            if (bool) {
-                previousState.availability = _.concat(previousState.availability, value);
-            } else {
-                previousState.availability = _.filter(previousState.availability, value);
-            }
-
+            previousState.availability = (bool? _.concat:_.filter)(previousState.availability, value);
             return previousState
         });
     }); 
@@ -101,6 +107,23 @@ export default class PlayerSignUp extends Component {
                     {days.map(day => (<ListItem primaryText={day.label} key={day.value}  leftCheckbox={<Checkbox onCheck={this.checkChange(day.value)} />} />))}
                 </List>
                 <br />
+                <SelectField
+                    floatingLabelText='Gender'
+                    floatingLabelFixed={true}
+                    value={this.state.position}
+                    onChange={this.handleChange('gender')}
+                    maxHeight={200}
+                >
+                    {genders.map(gender => (<MenuItem value={gender.value} key={gender.value} primaryText={gender.label} />))}
+                </SelectField>
+                <br />
+                <TextField
+                    hintText='25'
+                    floatingLabelText='Age'
+                    floatingLabelFixed={true}
+                    type='number'
+                    onChange={this.textChange('age')}
+                />
                 <TextField
                     hintText='70'
                     floatingLabelText='Weight (kg)'
