@@ -19,7 +19,7 @@ router.post('/:teamId/invite', (req, res, next) => {
     if (!team) {
       res.status(404);
       res.send({
-        errors: ['Not found']
+        errors: ['Team not found']
       });
     } else {
       TeamInvite.create({

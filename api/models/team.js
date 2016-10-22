@@ -26,10 +26,10 @@ module.exports = function(sequelize, DataTypes) {
           notEmpty: true,
           min: 1,
           max: 255,
-          isIn: [
+          isIn: [[
             'Football',
             'Hockey',
-          ]
+          ]]
         }
       },
       level: {
@@ -42,10 +42,10 @@ module.exports = function(sequelize, DataTypes) {
           notEmpty: true,
           min: 1,
           max: 255,
-          isIn: [
+          isIn: [[
             'Casual',
             'Amateur'
-          ]
+          ]]
         }
       }
     },

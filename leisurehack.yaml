@@ -73,25 +73,20 @@ paths:
           schema:
             $ref: '#/definitions/TeamInvite'
 
-  /team/{team_id}/game:
+  /game:
     post:
       summary: Create a new game
       description: |
         Create a new game
       parameters:
-        - name: team_id
-          in: path
-          description: A team id
-          required: true
-          type: string
         - name: game
           in: body
           description: A game
           required: true
           schema:
-              $ref: '#/definitions/TeamGame'
+              $ref: '#/definitions/Game'
       tags:
-        - TeamGame
+        - Game
       responses:
         200:
           description: New team invite
@@ -115,7 +110,7 @@ paths:
           required: true
           type: string
       tags:
-        - TeamGame
+        - Game
       responses:
         200:
           description: Accepted team game invite
@@ -135,7 +130,7 @@ paths:
           required: true
           type: string
       tags:
-        - TeamGame
+        - Game
       responses:
         200:
           description: Declined team game invite
@@ -255,9 +250,11 @@ definitions:
       phone:
         type: string
 
-  TeamGame:
+  Game:
     type: object
     properties:
+      teamId:
+        type: string
       location:
         type: string
       type:

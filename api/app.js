@@ -12,6 +12,7 @@ require('./strategies/passport')(passport);
 const routes = require('./routes/index')(passport);
 const users = require('./routes/users');
 const teams = require('./routes/teams');
+const games = require('./routes/games');
 
 
 var app = express();
@@ -33,6 +34,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/teams', teams);
+app.use('/games', games);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
