@@ -1,18 +1,26 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable(
-      'invite',
+      'user_team',
       {
         id: {
           type: Sequelize.UUID,
           primaryKey: true,
           defaultValue: Sequelize.UUIDV4
         },
-        email: {
-          type: Sequelize.STRING
+        userId: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'user',
+            key: 'id'
+          }
         },
-        mobile: {
-          type: Sequelize.STRING
+        teamId: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'team',
+            key: 'id'
+          }
         },
         createdAt: {
           type: Sequelize.DATE
@@ -25,6 +33,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('invite');
+    return queryInterface.dropTable('user_team');
   }
 };
