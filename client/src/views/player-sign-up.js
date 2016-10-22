@@ -47,15 +47,18 @@ const paperStyle = {
 };
 
 export default class PlayerSignUp extends Component {
-    state = {
-        sport: '',
-        position: '',
-        availability: [],
-        gender: '',
-        age: 0,
-        weight: 0,
-        height: 0
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            sport: '',
+            position: '',
+            availability: [],
+            gender: '',
+            age: 0,
+            weight: 0,
+            height: 0
+        };
+    }
 
     handleChange = curry((name, event, index, value) => {
         this.setState(previousState => {
@@ -140,7 +143,7 @@ export default class PlayerSignUp extends Component {
                 />
                 <br />
                 <br />
-                <RaisedButton label="Next" primary={true} />
+                <RaisedButton onClick={() => this.props.onViewChange('TeamSignUp')} label="Next" primary={true} />
             </Paper>
         );
     }

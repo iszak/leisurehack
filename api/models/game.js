@@ -24,10 +24,10 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notEmpty: true,
-          isIn: [
+          isIn: [[
             '5 aside',
             '11 aside',
-          ]
+          ]]
         }
       },
       date: {

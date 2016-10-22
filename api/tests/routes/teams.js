@@ -3,8 +3,8 @@ const app = require('../../app');
 const assert = require('assert');
 
 
-describe('POST /teams', function() {
-  it('respond with bad request', function(done) {
+describe('POST /teams', () => {
+  it('fail to create a fail', done => {
     request(app)
       .post('/teams')
       .set('Accept', 'application/json')
@@ -13,7 +13,7 @@ describe('POST /teams', function() {
   });
 
 
-  it('respond with ok request', function(done) {
+  it('should create a team', done => {
     request(app)
       .post('/teams')
       .send({
@@ -32,5 +32,52 @@ describe('POST /teams', function() {
         assert(res.body.updatedAt != null)
       })
       .expect(201, done);
+  });
+});
+
+
+describe('POST /teams/id/invite', () => {
+  it('team doesnt exist', done => {
+    request(app)
+      .post('/teams/21563c68-a8a1-41f6-8a56-9fb5b7bd34d7/invite')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done);
+  });
+
+
+  it('should create a team invite', done => {
+    request(app)
+      .post('/teams')
+      .send({
+        name: 'A-Team',
+        sport: 'Football',
+        level: 'Casual',
+      })
+      .expect(201)
+      .then(res => {
+        request(app)
+          .post(`/teams/${res.body.id}/invite`)
+          .send({
+            email: 'foo@bar.com',
+          })
+          .expect(201, done);
+      });
+  });
+
+  it('fail to create a fail', function(done) {
+    request(app)
+      .post('/teams')
+      .send({
+        name: 'A-Team',
+        sport: 'Football',
+        level: 'Casual',
+      })
+      .expect(201)
+      .then(res => {
+        request(app)
+          .post(`/teams/${res.body.id}/invite`)
+          .expect(400, done);
+      });
   });
 });

@@ -22,11 +22,14 @@ const paperStyle = {
 };
 
 export default class TeamSignUp extends Component {
-    state = { 
-        team: '',
-        sport: '',
-        level: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = { 
+            team: '',
+            sport: '',
+            level: ''
+        };
+    }
 
     handleChange = curry((name, event, index, value) => {
         this.setState(previousState => {
@@ -74,7 +77,7 @@ export default class TeamSignUp extends Component {
                 </SelectField>
                 <br />
                 <br />
-                <RaisedButton label="Next" primary={true} />
+                <RaisedButton onClick={() => this.props.onViewChange('InviteTeamMembers')} label="Next" primary={true} />
             </Paper>
         );
     }
