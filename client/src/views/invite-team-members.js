@@ -9,43 +9,81 @@ import curry from 'lodash/fp/curry';
 import _ from 'lodash';
 
 
-const paperStyle = {
-    padding: 20
+const styles = {
+    paper: {
+        padding: 20    
+    },
+    addButton: {
+        marginLeft: 20
+    },
+    chip: {
+        marginRight: 10,
+        marginBottom: 10
+    },
+    wrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        paddingTop: 20,
+        paddingBottom: 20
+    }
 };
 
 export default class InviteTeamMembers extends Component {
-    state = { emails: [] };
+    state = { currentText: '', emails: [] };
 
-    renderChip(data) {
+    addEmail = (event) => {
+        this.setState(previousState => {
+            previousState.emails = _.concat(previousState.emails, previousState.currentText);
+            previousState.currentText = '';
+            return previousState
+        });
+    }
+
+    textChange = curry((name, event, value) => {
+        this.setState(previousState => {
+            previousState[name] = value
+            return previousState
+        });
+    });
+
+    removeEmail = (email) => {
+        this.setState(previousState => {
+            previousState.emails = _.filter(previousState.emails, email);
+            return previousState
+        });
+    }
+
+    renderChip(email) {
         return (
             <Chip
-                key={data.key}
-                onRequestDelete={() => this.handleRequestDelete(data.key)}
-                style={this.styles.chip}
+                key={email}
+                onRequestDelete={() => this.removeEmail(email)}
+                style={styles.chip}
                 >
-                {data.label}
+                {email}
             </Chip>
         );
     }
 
     render() {
         return (
-             <Paper style={paperStyle} zDepth={1}>
+             <Paper style={styles.paper} zDepth={1}>
                 <h1>Invite team members</h1>
                 <TextField
                     hintText='example@gmail.com'
                     floatingLabelText='Email'
                     floatingLabelFixed={true}
                     type='email'
+                    value={this.state.currentText}
+                    onChange={this.textChange('currentText')}
                 />
-                <FloatingActionButton mini={true}>
+                <FloatingActionButton mini={true} style={styles.addButton} zDepth={1} onClick={this.addEmail}>
                     <ContentAdd />
                 </FloatingActionButton>
                 <br />
-                <div>
+                <div style={styles.wrapper}>
                     {this.state.emails.map(this.renderChip, this)}
                 </div>
-                <br />
                 <br />
                 <RaisedButton label="Next" primary={true} />
             </Paper>
