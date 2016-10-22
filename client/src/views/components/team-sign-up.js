@@ -115,9 +115,8 @@ export default class PlayerSignUp extends Component {
                     type='number'
                     onChange={this.textChange('height')}
                 />
-                <br />
-                <br />
-                <RaisedButton label="Next" primary={true} />
+                
+                <RaisedButton label="Primary" primary={true} />
             </Paper>
         );
     }
