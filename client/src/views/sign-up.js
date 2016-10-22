@@ -84,7 +84,7 @@ export default class SignUp extends Component {
                 />
                 <br />
                 <br />
-                <RaisedButton onClick={() => this.props.onViewChange('PlayerSignUp')} label="Sign Up" primary={true} />
+                <RaisedButton onClick={this.handleSignup} label="Sign Up" primary={true} />
             </Paper>
         );
     }
