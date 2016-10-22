@@ -29,7 +29,13 @@ const styles = {
 };
 
 export default class InviteTeamMembers extends Component {
-    state = { currentText: '', emails: [] };
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentText: '',
+            emails: []
+        };
+    }
 
     addEmail = (event) => {
         this.setState(previousState => {
@@ -85,7 +91,7 @@ export default class InviteTeamMembers extends Component {
                     {this.state.emails.map(this.renderChip, this)}
                 </div>
                 <br />
-                <RaisedButton label="Next" primary={true} />
+                <RaisedButton onClick={() => this.props.onViewChange('Dashboard')} label="Next" primary={true} />
             </Paper>
         );
     }

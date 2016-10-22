@@ -11,12 +11,15 @@ const paperStyle = {
 };
 
 export default class SignUp extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        password: '',
-        email: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            password: '',
+            email: ''
+        };
+    }
 
     textChange = curry((name, event, value) => {
         this.setState(previousState => {
@@ -59,7 +62,7 @@ export default class SignUp extends Component {
                 />
                 <br />
                 <br />
-                <RaisedButton label="Sign Up" primary={true} />
+                <RaisedButton onClick={() => this.props.onViewChange('PlayerSignUp')} label="Sign Up" primary={true} />
             </Paper>
         );
     }
