@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  app:
+    command: npm run start
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+
+  npm:
+    image: leisurehack/api:latest
+    command: install
+    entrypoint: npm
+    volumes:
+      - ./:/app
+
+  postgres:
+    expose:
+      - 5432
+    ports:
+      - 5432
