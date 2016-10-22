@@ -13,7 +13,7 @@ module.exports = {
           allowNull: false,
         },
         sport: {
-          type: DataTypes.ENUM(
+          type: Sequelize.ENUM(
             'Football',
             'Hockey'
           ),
