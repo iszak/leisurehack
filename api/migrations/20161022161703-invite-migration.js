@@ -13,6 +13,12 @@ module.exports = {
         },
         mobile: {
           type: Sequelize.STRING
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
         }
       }
     );

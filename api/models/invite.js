@@ -8,13 +8,22 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: DataTypes.UUIDV4
       },
       email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: true,
+        },
       },
       mobile: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       }
     },
     {
+      freezeTableName: true,
       classMethods:{
         associate: function(models) {
           Invite.belongsTo(models.user)

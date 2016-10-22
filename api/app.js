@@ -5,12 +5,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var passport = require('passport');
 
 require('./strategies/passport')(passport);
 
-const routes = require('./routes/index');
+const routes = require('./routes/index')(passport);
 const users = require('./routes/users');
 const teams = require('./routes/teams');
 

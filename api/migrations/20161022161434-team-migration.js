@@ -10,15 +10,27 @@ module.exports = {
         },
         name: {
           type: Sequelize.STRING,
+          allowNull: false,
         },
         sport: {
-          type: Sequelize.STRING,
+          type: Sequelize.ENUM(
+            'Football',
+            'Hockey'
+          ),
+          allowNull: false,
         },
         level: {
+          allowNull: false,
           type: Sequelize.ENUM(
             'Casual',
             'Amateur'
           )
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
         }
       }
     );

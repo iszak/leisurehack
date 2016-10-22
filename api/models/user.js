@@ -8,25 +8,61 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: DataTypes.UUIDV4
       },
       firstName: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
       lastName: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
       email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: true,
+        },
       },
       gender: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          isIn: [
+            'male',
+            'female'
+          ],
+        },
       },
       age: {
-        type: DataTypes.FLOAT
+        type: DataTypes.FLOAT,
+        validate: {
+          notEmpty: true,
+          isNumeric: true,
+        },
       },
       weight: {
-        type: DataTypes.FLOAT
+        type: DataTypes.FLOAT,
+        validate: {
+          notEmpty: true,
+          isNumeric: true,
+        },
       },
       sport: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        notNull: true,
+        validate: {
+          notEmpty: true,
+          isIn: [
+            'Football',
+            'Hockey'
+          ],
+        },
       },
       position: {
         type: DataTypes.ENUM(
@@ -38,13 +74,28 @@ module.exports = function(sequelize, DataTypes) {
           'Right mid',
           'Striker',
           'Goalkeeper'
-        )
+        ),
+        notNull: true,
+        validate: {
+          notEmpty: true,
+          isIn: [
+            'Left back',
+            'Right back',
+            'Center back',
+            'Left mid',
+            'Center mid',
+            'Right mid',
+            'Striker',
+            'Goalkeeper'
+          ],
+        },
       },
       availability: {
         type: DataTypes.ARRAY(DataTypes.TEXT)
       }
     },
     {
+      freezeTableName: true,
       classMethods:{
         associate: function(models) {
           User.hasMany(models.invite);
