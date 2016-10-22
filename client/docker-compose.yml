@@ -3,3 +3,5 @@ version: '2'
 services:
   app:
     image: leisurehack/client:latest
+    env_file:
+      - docker/env/app.env
