@@ -1,0 +1,264 @@
+swagger: '2.0'
+info:
+  title: Leisure Hack
+  description: Get more people exercising, more often
+  version: "1.0.0"
+
+schemes:
+  - https
+
+basePath: /
+
+produces:
+  - application/json
+
+paths:
+  /player:
+    post:
+      summary: Player
+      description: |
+        Create a player
+      parameters:
+        - name: player
+          in: body
+          description: A player
+          required: true
+          schema:
+              $ref: '#/definitions/Player'
+      tags:
+        - Player
+      responses:
+        200:
+          description: New player
+          schema:
+            $ref: '#/definitions/Player'
+
+  /team:
+    post:
+      summary: Team
+      description: |
+        Create a team
+      parameters:
+        - name: team
+          in: body
+          description: A team
+          required: true
+          schema:
+              $ref: '#/definitions/Team'
+      tags:
+        - Team
+      responses:
+        200:
+          description: New team
+          schema:
+            $ref: '#/definitions/Team'
+
+  /team/invite:
+    post:
+      summary: Team invite
+      description: |
+        Invite a player to join a team
+      parameters:
+        - name: invite
+          in: body
+          description: A team invite
+          required: true
+          schema:
+              $ref: '#/definitions/TeamInvite'
+      tags:
+        - Team
+      responses:
+        200:
+          description: New team invite
+          schema:
+            $ref: '#/definitions/TeamInvite'
+
+  /team/{team_id}/game:
+    post:
+      summary: Create a new game
+      description: |
+        Create a new game
+      parameters:
+        - name: team_id
+          in: path
+          description: A team id
+          required: true
+          type: string
+        - name: game
+          in: body
+          description: A game
+          required: true
+          schema:
+              $ref: '#/definitions/TeamGame'
+      tags:
+        - TeamGame
+      responses:
+        200:
+          description: New team invite
+          schema:
+            $ref: '#/definitions/TeamInvite'
+
+  /team/{team_id}/game/{player_id}:
+    post:
+      summary: Accept a team game invite
+      description: |
+        Accept a team game invite
+      parameters:
+        - name: team_id
+          in: path
+          description: A team id
+          required: true
+          type: string
+        - name: player_id
+          in: path
+          description: A player id
+          required: true
+          type: string
+      tags:
+        - TeamGame
+      responses:
+        200:
+          description: Accepted team game invite
+    delete:
+      summary: Decline a team game invite
+      description: |
+        Decline a team game invite
+      parameters:
+        - name: team_id
+          in: path
+          description: A team id
+          required: true
+          type: string
+        - name: player_id
+          in: path
+          description: A player id
+          required: true
+          type: string
+      tags:
+        - TeamGame
+      responses:
+        200:
+          description: Declined team game invite
+
+
+definitions:
+  Availability:
+    type: object
+    properties:
+      day:
+        type: string
+        enum:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+      start_time:
+        type: string
+        format: date-time
+      end_time:
+        type: string
+        format: date-time
+
+  Date:
+    type: object
+    properties:
+      start:
+        type: string
+        format: date-time
+      end:
+        type: string
+        format: date-time
+
+
+  Player:
+    type: object
+    required:
+      - name
+      - sport
+      - position
+      - availability
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        description: Full name
+      sport:
+        type: string
+        description: Sport
+        enum:
+          - Football
+      position:
+        type: string
+        description: Position
+        enum:
+          - Left back
+          - Right back
+          - Center back
+          - Left mid
+          - Center mid
+          - Right mid
+          - Striker
+          - Goalkeeper
+      age:
+        type: number
+        format: int32
+        description: Age
+      weight:
+        type: number
+        format: float
+        description: Weight
+      height:
+        type: number
+        format: float
+        description: Height
+      availability:
+        type: array
+        items:
+          $ref: "#/definitions/Availability"
+
+
+  Team:
+    type: object
+    required:
+      - name
+      - sport
+      - level
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        description: Team name
+      sport:
+        type: string
+        description: Team name
+      level:
+        type: string
+        enum:
+          - Casual
+          - Amateur
+
+  TeamInvite:
+    type: object
+    properties:
+      email:
+        type: string
+      phone:
+        type: string
+
+  TeamGame:
+    type: object
+    properties:
+      location:
+        type: string
+      type:
+        type: string
+        enum:
+          - 5 aside
+          - 11 aside
+      date:
+        $ref: "#/definitions/Date"
