@@ -7,9 +7,9 @@ router.post('/', (req, res, next) => {
   Team.create(req.body).then(team => {
     res.status(201);
     res.send(team);
-  }, error => {
+  }, errors => {
     res.status(400);
-    res.send(error);
+    res.send(errors);
   })
 });
 
