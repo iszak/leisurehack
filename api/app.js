@@ -1,12 +1,11 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var passport = require('passport');
 
 var app = express();
 
@@ -16,9 +15,17 @@ var app = express();
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'ben is amazing' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./strategies/passport')(passport);
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
 app.use('/', routes);
 app.use('/users', users);
