@@ -9,14 +9,13 @@ module.exports = function(sequelize, DataTypes) {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
         validate: {
+          notEmpty: true,
           isEmail: true,
         },
       },
       mobile: {
         type: DataTypes.STRING,
-        allowNull: false,
         validate: {
           notEmpty: true,
         },
@@ -27,6 +26,13 @@ module.exports = function(sequelize, DataTypes) {
       classMethods:{
         associate: function(models) {
           TeamInvite.belongsTo(models.team)
+        }
+      },
+      validate: {
+        hasEmailOrMobile: function() {
+          if (!this.email && !this.mobile) {
+            throw new Error('Team invite must have either email or mobile');
+          }
         }
       }
     }
