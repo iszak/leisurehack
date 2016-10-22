@@ -168,9 +168,25 @@ definitions:
         format: date-time
 
 
+
+  Session:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        description: Email
+      password:
+        type: string
+        description: Password
+
   User:
     type: object
     required:
+      - email
+      - password
       - name
       - sport
       - position
@@ -178,6 +194,12 @@ definitions:
     properties:
       id:
         type: string
+      email:
+        type: string
+        description: Email
+      password:
+        type: string
+        description: Password
       name:
         type: string
         description: Full name
