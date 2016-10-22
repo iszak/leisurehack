@@ -56,6 +56,7 @@ module.exports = function(sequelize, DataTypes) {
           Team.belongsToMany(models.user, {
             through: models.user_team
           })
+          Team.hasMany(models.team_invite)
         }
       }
     }
