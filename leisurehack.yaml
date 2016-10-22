@@ -191,6 +191,7 @@ definitions:
         description: Sport
         enum:
           - Football
+          - Hockey
       position:
         type: string
         description: Position
@@ -235,9 +236,13 @@ definitions:
         description: Team name
       sport:
         type: string
-        description: Team name
+        description: Sport
+        enum:
+          - Football
+          - Hockey
       level:
         type: string
+        description: Level
         enum:
           - Casual
           - Amateur

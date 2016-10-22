@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
-  const Invite = sequelize.define(
-    'invite',
+  const TeamInvite = sequelize.define(
+    'team_invite',
     {
       id: {
         type: DataTypes.UUID,
@@ -26,11 +26,11 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          Invite.belongsTo(models.user)
+          TeamInvite.belongsTo(models.team)
         }
       }
     }
   );
 
-  return Invite
+  return TeamInvite
 };

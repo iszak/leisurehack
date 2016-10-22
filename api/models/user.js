@@ -106,8 +106,12 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          // User.hasMany(models.invite);
-          // User.belongsTo(models.team);
+          User.belongsToMany(models.team, {
+            through: models.user_team
+          })
+          User.belongsToMany(models.game, {
+            through: models.game_user
+          })
         }
       }
     }
