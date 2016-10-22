@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  app:
+    command: npm run start
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+
+  npm:
+    image: leisurehack/client:latest
+    command: install
+    entrypoint: npm
+    volumes:
+      - ./:/app
