@@ -33,7 +33,7 @@ module.exports = (db) => {
           res.send(json)
         }, next)
       }
-    }).catch(next)
+    }, next)
   });
 
   router.post('/:teamId/invite', (req, res, next) => {
@@ -55,7 +55,7 @@ module.exports = (db) => {
           res.send(error.errors);
         })
       }
-    }).catch(next)
+    }, next)
   });
 
   return router;

@@ -4,8 +4,7 @@ module.exports = (db, passport) => {
   var router = express.Router();
 
   router.post('/update', (req, res, next) => {
-
-    db.user.findOne({ where: {'id': req.user} }).then(function(user) {
+    db.user.findOne({ where: {'id': req.user} }).then(user => {
       console.log(user);
 
       user.update(req.body).then(user => {
@@ -15,7 +14,7 @@ module.exports = (db, passport) => {
         res.status(400);
         res.send(error.errors);
       });
-    });
+    }, next);
   });
 
   return router;
