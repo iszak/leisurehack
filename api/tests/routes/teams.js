@@ -33,6 +33,38 @@ describe('POST /teams', () => {
       })
       .expect(201, done);
   });
+
+
+  it('should get a team failure', done => {
+    request(app)
+      .get('/teams/d4f91e66-14a2-4bc5-8b24-461c45d24f02')
+      .expect(404, done)
+  });
+
+
+  it('should get a team success', done => {
+    request(app)
+      .post('/teams')
+      .send({
+        name: 'A-Team',
+        sport: 'Football',
+        level: 'Casual',
+      })
+      .expect(201)
+      .then(res => {
+        request(app)
+          .get(`/teams/${res.body.id}`)
+          .expect(res => {
+            assert(res.body.id != null)
+            assert(res.body.name == 'A-Team')
+            assert(res.body.sport == 'Football')
+            assert(res.body.level == 'Casual')
+            assert(res.body.createdAt != null)
+            assert(res.body.updatedAt != null)
+          })
+          .expect(200, done);
+      });
+  });
 });
 
 

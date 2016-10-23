@@ -12,6 +12,7 @@ module.exports = function(db, passport){
       res.send(req.user)
     } else {
       res.status(404)
+      res.send()
     }
   });
 
