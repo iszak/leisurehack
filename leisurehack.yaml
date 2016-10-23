@@ -287,9 +287,11 @@ definitions:
   TeamInvite:
     type: object
     properties:
+      name:
+        type: string
       email:
         type: string
-      phone:
+      phoneNumber:
         type: string
 
   Game:

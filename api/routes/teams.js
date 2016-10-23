@@ -25,7 +25,7 @@ module.exports = (db) => {
           errors: ['Team not found']
         });
       } else {
-        team.getUsers().then(users => {
+        team.getPlayers().then(users => {
           const json = team.toJSON()
           json.users = users
 

@@ -78,7 +78,8 @@ module.exports = function(sequelize, DataTypes) {
       classMethods:{
         associate: function(models) {
           UserProfile.belongsTo(models.user, {
-            as: 'User'
+            as: 'User',
+            foreignKey: 'userId',
           })
         }
       }

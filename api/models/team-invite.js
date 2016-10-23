@@ -26,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
       classMethods:{
         associate: function(models) {
           TeamInvite.belongsTo(models.team, {
-            as: 'Team'
+            as: 'Team',
+            foreignKey: 'teamId',
           })
         }
       },

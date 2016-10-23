@@ -13,10 +13,12 @@ module.exports = function(sequelize, DataTypes) {
       classMethods:{
         associate: function(models) {
           UserTeam.belongsTo(models.user, {
-            as: 'User'
+            as: 'User',
+            foreignKey: 'userId',
           });
           UserTeam.belongsTo(models.team, {
-            as: 'Team'
+            as: 'Team',
+            foreignKey: 'teamId',
           });
         }
       }
