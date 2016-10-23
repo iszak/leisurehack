@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
+
 const games = [
     {id: 0, opponent: 'Rotherham FC', date: '2016-02-16', time: '10:00am'},
     {id: 1, opponent: 'Dulston United', date: '2016-02-23', time: '10:00am'},
@@ -33,6 +34,14 @@ export default class Stats extends Component {
     render() {
         return (
             <div>
+                <Paper style={styles.paper} zDepth={1}>
+                    <h2>Team metrics</h2>
+
+                </Paper>
+                <Paper style={styles.paper} zDepth={1}>
+                    <h2>Player metrics</h2>
+                    
+                </Paper>
                 <Paper style={styles.paper} zDepth={1}>
                     <h2>Scheduled games</h2>
                     {games.map(game => (<div key={game.id} style={styles.inlineGame}>

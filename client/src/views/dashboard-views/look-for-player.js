@@ -79,7 +79,6 @@ export default class LookForPlayer extends Component {
                                 filter={AutoComplete.fuzzyFilter}
                                 dataSource={players}
                                 maxSearchResults={5}
-                                onNewRequest={this.onSearch}
                             />
                         </div>
                     </Tab>

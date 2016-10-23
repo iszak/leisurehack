@@ -29,5 +29,13 @@
     <div id='root'>
     </div>
     <script src="/static/bundle.js"></script>
+    <script>
+      var map;
+      function initMap() {
+        console.log('map ready');
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvP1yuo7_2wKKJrRLkpQ9FYYyD1pE1Jdc&callback=initMap"
+    async defer></script>
   </body>
 </html>
