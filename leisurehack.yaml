@@ -33,6 +33,26 @@ paths:
           schema:
             $ref: '#/definitions/User'
 
+  /team/{id}:
+    get:
+      summary: Get team
+      description: |
+        Get team
+      parameters:
+        - name: id
+          in: path
+          description: A team id
+          required: true
+          type: number
+      tags:
+        - Team
+      responses:
+        200:
+          description: A team
+          schema:
+            $ref: '#/definitions/Team'
+
+
   /team:
     post:
       summary: Team
