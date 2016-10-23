@@ -13,21 +13,21 @@ describe('POST /signup', function() {
   // });
 
 
-  it('respond with ok request', function(done) {
-    request(app)
-      .post('/signup')
-      .send({
-        email: 'bish0p@hotmail.com',
-        password: 'password',
-        firstName: 'Ben',
-        lastName: 'Bishop',
-
-      })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(res => {
-        console.log(res.body);
-      })
-      .expect(201, done);
-  });
+  // it('respond with ok request', function(done) {
+  //   request(app)
+  //     .post('/signup')
+  //     .send({
+  //       email: 'bish0p@hotmail.com',
+  //       password: 'password',
+  //       firstName: 'Ben',
+  //       lastName: 'Bishop',
+  //
+  //     })
+  //     .set('Accept', 'application/json')
+  //     .expect('Content-Type', /json/)
+  //     .expect(res => {
+  //       console.log(res.body);
+  //     })
+  //     .expect(201, done);
+  // });
 });
