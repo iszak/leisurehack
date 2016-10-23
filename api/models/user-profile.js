@@ -77,7 +77,10 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          UserProfile.belongsTo(models.user)
+          UserProfile.belongsTo(models.user, {
+            as: 'User',
+            foreignKey: 'userId',
+          })
         }
       }
     }

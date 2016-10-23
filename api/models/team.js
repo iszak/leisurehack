@@ -53,11 +53,19 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          Team.belongsToMany(models.user, {
-            as: 'Users',
-            through: models.user_team
+          Team.belongsTo(models.user, {
+            as: 'Owner',
+            foreignKey: 'ownerId',
           })
-          Team.hasMany(models.team_invite)
+          Team.belongsToMany(models.user, {
+            as: 'Players',
+            through: models.user_team,
+            foreignKey: 'userId'
+          })
+          Team.hasMany(models.team_invite, {
+            as: 'Invites',
+            foreignKey: 'teamId',
+          })
         }
       }
     }

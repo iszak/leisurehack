@@ -91,6 +91,7 @@ describe('POST /teams/id/invite', () => {
         request(app)
           .post(`/teams/${res.body.id}/invite`)
           .send({
+            name: 'Foo Bar',
             email: 'foo@bar.com',
           })
           .expect(201, done);

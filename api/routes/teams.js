@@ -25,7 +25,7 @@ module.exports = (db) => {
           errors: ['Team not found']
         });
       } else {
-        team.getUsers().then(users => {
+        team.getPlayers().then(users => {
           const json = team.toJSON()
           json.users = users
 
@@ -33,7 +33,7 @@ module.exports = (db) => {
           res.send(json)
         }, next)
       }
-    }).catch(next)
+    }, next)
   });
 
   router.post('/:teamId/invite', (req, res, next) => {
@@ -55,7 +55,7 @@ module.exports = (db) => {
           res.send(error.errors);
         })
       }
-    }).catch(next)
+    }, next)
   });
 
   return router;

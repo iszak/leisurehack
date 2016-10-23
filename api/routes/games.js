@@ -18,7 +18,7 @@ module.exports = (db) => {
         res.status(200);
         res.send(game.toJSON());
       }
-    })
+    }, next)
   });
 
 
@@ -39,7 +39,7 @@ module.exports = (db) => {
           res.send(error.errors);
         })
       }
-    })
+    }, next)
   });
 
   return router

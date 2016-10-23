@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "mocha --recursive tests/"
+    "test": "mocha --bail --recursive tests/"
   },
   "dependencies": {
+    "aws-sdk": "^2.6.11",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.1",
