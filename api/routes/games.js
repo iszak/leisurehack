@@ -6,6 +6,22 @@ module.exports = (db) => {
   const Team = db.team
   const Game = db.game
 
+
+  router.get('/:gameId', (req, res, next) => {
+    Game.findById(req.params.gameId).then(game => {
+      if (!game) {
+        res.status(404);
+        res.send({errors: ['Game not found']});
+      } else {
+        const data = req.body
+
+        res.status(200);
+        res.send(game.toJSON());
+      }
+    })
+  });
+
+
   router.post('/', (req, res, next) => {
     Team.findById(req.body.teamId).then(team => {
       if (!team) {

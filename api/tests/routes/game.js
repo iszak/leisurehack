@@ -3,6 +3,44 @@ const app = require('../../app');
 const assert = require('assert');
 
 
+describe('GET /games/id', () => {
+  it('view a game not found', done => {
+    request(app)
+      .post('/games/253d7f09-df60-488a-9dc0-16a4548968bc')
+      .expect(404, done);
+  });
+
+
+  it('view a game', done => {
+    request(app)
+      .post('/teams')
+      .send({
+        name: 'A-Team',
+        sport: 'Football',
+        level: 'Casual',
+      })
+      .expect(201)
+      .then(res => {
+        request(app)
+          .post('/games')
+          .send({
+            teamId: res.body.id,
+            location: 'London Fields',
+            type: '11 aside',
+            date: '2016-01-01 00:00:00',
+          })
+          .expect(201)
+          .then(res => {
+            request(app)
+              .get(`/games/${res.body.id}`)
+              .set('Accept', 'application/json')
+              .expect('Content-Type', /json/)
+              .expect(200, done)
+          })
+      })
+  });
+})
+
 describe('POST /games', () => {
   it('fail to create a game team not found', done => {
     request(app)

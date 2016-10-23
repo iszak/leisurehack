@@ -15,9 +15,7 @@ module.exports = (db, passport) => {
         res.status(400);
         res.send(error.errors);
       });
-
     });
-
   });
 
   return router;
