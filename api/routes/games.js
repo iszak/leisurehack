@@ -17,7 +17,7 @@ module.exports = (db) => {
 
         Game.create(data).then(game => {
           res.status(201);
-          res.send(game);
+          res.send(game.toJSON());
         }, error => {
           res.status(400);
           res.send(error.errors);

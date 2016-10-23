@@ -10,7 +10,7 @@ module.exports = (db, passport) => {
 
       user.update(req.body).then(user => {
         res.status(201);
-        res.send(user);
+        res.send(user.toJSON());
       }, error => {
         res.status(400);
         res.send(error.errors);

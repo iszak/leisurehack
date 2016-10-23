@@ -54,6 +54,7 @@ module.exports = function(sequelize, DataTypes) {
       classMethods:{
         associate: function(models) {
           Team.belongsToMany(models.user, {
+            as: 'Users',
             through: models.user_team
           })
           Team.hasMany(models.team_invite)
