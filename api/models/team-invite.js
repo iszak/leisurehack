@@ -25,7 +25,9 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          TeamInvite.belongsTo(models.team)
+          TeamInvite.belongsTo(models.team, {
+            as: 'Team'
+          })
         }
       },
       validate: {

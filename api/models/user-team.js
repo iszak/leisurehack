@@ -12,8 +12,12 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods:{
         associate: function(models) {
-          UserTeam.belongsTo(models.user);
-          UserTeam.belongsTo(models.team);
+          UserTeam.belongsTo(models.user, {
+            as: 'User'
+          });
+          UserTeam.belongsTo(models.team, {
+            as: 'Team'
+          });
         }
       }
     }
