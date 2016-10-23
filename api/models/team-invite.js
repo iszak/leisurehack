@@ -7,6 +7,13 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
       },
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+          isEmail: true,
+        },
+      },
       email: {
         type: DataTypes.STRING,
         validate: {
@@ -14,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
           isEmail: true,
         },
       },
-      mobile: {
+      phoneNumber: {
         type: DataTypes.STRING,
         validate: {
           notEmpty: true,

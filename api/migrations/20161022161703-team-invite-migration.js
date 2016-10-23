@@ -15,10 +15,13 @@ module.exports = {
             key: 'id'
           }
         },
+        name: {
+          type: Sequelize.STRING
+        },
         email: {
           type: Sequelize.STRING
         },
-        mobile: {
+        phoneNumber: {
           type: Sequelize.STRING
         },
         createdAt: {
