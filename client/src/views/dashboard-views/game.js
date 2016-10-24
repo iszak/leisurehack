@@ -16,7 +16,7 @@ export default class Game extends Component {
     static defaultProps = {
         center: {lat: 51.6032123, lng: -0.0679276},
         zoom: 15
-      };
+    };
 
     render() {
         return (
